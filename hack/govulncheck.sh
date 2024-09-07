@@ -2,9 +2,12 @@
 
 set -euo pipefail
 
+# For Go version 1.21 or newer.
+GOVULNCHECK_VERSION=1.1.3
+
 # Install dependencies
-sudo apt-get update
-sudo apt-get install -y pkg-config libgpgme-dev libbtrfs-dev libseccomp-dev libdevmapper-dev btrfs-progs
+apt-get update
+apt-get install -y pkg-config libgpgme-dev libbtrfs-dev libseccomp-dev btrfs-progs
 
 # Set environment variables
 export GO111MODULE=on
@@ -13,8 +16,8 @@ export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
 GOPATH_BIN=$(go env GOPATH)/bin
 export PATH="$PATH:$GOPATH_BIN"
 
-# Install gosec
-go install golang.org/x/vuln/cmd/govulncheck@latest
+# Install govulncheck
+go install golang.org/x/vuln/cmd/govulncheck@v${GOVULNCHECK_VERSION}
 
 # Generate report
 report=$(mktemp)

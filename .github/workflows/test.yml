@@ -367,7 +367,7 @@ jobs:
       - uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
         with:
           go-version: ${{ env.GO_VERSION }}
-      - name: Run Govulncheck
-        run: make verify-govulncheck
-      - name: Run Gosec
-        run: make verify-gosec
+      - name: Run govulncheck
+        run: sudo -E make verify-govulncheck
+      - name: Run gosec
+        run: sudo -E make verify-gosec
